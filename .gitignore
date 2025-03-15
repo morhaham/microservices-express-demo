@@ -1,0 +1,8 @@
+.aider*
+node_modules
+
+# Emacs swap files
+*#
+
+# Emacs backup files
+*~
