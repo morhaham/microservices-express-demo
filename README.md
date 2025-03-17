@@ -17,3 +17,12 @@
     `kubectl exec -it <kafka-pod-name> -- sh -c 'cd /opt/kafka/bin/ && sh'`
     4. check message in kafka pod with:
     `/opt/kafka/bin $ ./kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test-topic --from-beginning --partition=0`
+
+
+## Todo
+    * create k8s deployment for the express api app.
+    * use ingress controller:
+    `kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/cloud/deploy.yaml
+`
+    * apply the ingress resource:
+    `kubectl apply -f express-api-ingress.yaml`
