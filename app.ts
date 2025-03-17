@@ -13,12 +13,13 @@ app.get('/', (_, res) => {
 app.get('/send-message', async (req, res) => {
     try {
         const message = req.query.message || 'Default message'; // Get message from query parameter
-        await producerSend({
+        const resp = await producerSend({
             topic,
             messages: [
                 { value: message.toString() },
             ],
         });
+        console.log("[producerSend] response: ", resp)
         res.send(`Message sent: ${message}`);
     } catch (error) {
         console.error("Failed to send message:", error);
