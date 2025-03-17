@@ -13,14 +13,15 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.21.2",
+    "kafkajs": "^2.2.4",
     "typescript": "^5.8.2"
   },
   "devDependencies": {
     "@types/express": "^5.0.0",
     "concurrently": "^8.2.2"
   },
-    "engines": {
-        "node": "^23.3.0",
-        "pnpm": "^10.6.3"
-    }
+  "engines": {
+    "node": "^23.3.0",
+    "pnpm": "^10.6.3"
+  }
 }
