@@ -2,17 +2,17 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: express-api-ingress
+  namespace: development
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
-    - host: express-api.example.com  # Replace with your actual domain
-      http:
+    - http:
         paths:
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: express-api  # This should match your service name
+                name: express-api-service
                 port:
-                  number: 80  # Port 80 from the service
+                  number: 3000

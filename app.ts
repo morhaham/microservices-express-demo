@@ -5,9 +5,19 @@ const app = express();
 const port = 3000;
 const topic = process.env.KAFKA_TOPIC || 'test-topic';
 
+// print env variables
+console.log("KAFKA_BROKERS: ", process.env.KAFKA_BROKERS);
+console.log("KAFKA_TOPIC: ", process.env.KAFKA_TOPIC);
+console.log("NODE_ENV: ", process.env.NODE_ENV);
+
 // --- Routes ---
 app.get('/', (_, res) => {
   res.send('Hello, Microservices!');
+});
+
+// Health check endpoint
+app.get('/health', (_, res) => {
+  res.status(200).json({ status: 'healthy' });
 });
 
 app.get('/send-message', async (req, res) => {

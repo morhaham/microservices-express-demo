@@ -6,6 +6,7 @@
   "scripts": {
     "tsc:watch": "tsc -w",
     "dev": "concurrently \"pnpm tsc:watch\" \"node --watch ./dist/app.js\"",
+    "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -21,7 +22,7 @@
     "concurrently": "^8.2.2"
   },
   "engines": {
-    "node": "^23.3.0",
+    "node": ">=18.0.0",
     "pnpm": "^10.6.3"
   }
 }
