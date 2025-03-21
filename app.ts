@@ -1,5 +1,5 @@
 import express from "express";
-import { producerSend } from "./kafka";
+import { producerSend, runConsumer } from "./kafka";
 
 const app = express();
 const port = 3000;
@@ -37,6 +37,10 @@ app.get('/send-message', async (req, res) => {
     }
 });
 
-app.listen(port, () => {
+app.listen(port, async () => {
   console.log(`Service running on port ${port}`);
+
+  await runConsumer('test-group', 'test-topic', true, async (message) => {
+    console.log("[runConsumer] message: ", message);
+  });
 });

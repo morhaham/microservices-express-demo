@@ -10,7 +10,7 @@ echo "Removing ingress..."
 kubectl delete ingress express-api-ingress -n development --ignore-not-found
 
 echo "Removing kafka..."
-kubectl delete deployment kafka --ignore-not-found
+kubectl delete deployment kafka -n kafka --ignore-not-found
 
 # Delete deployment if exists
 echo "Removing deployment..."
@@ -19,6 +19,7 @@ kubectl delete deployment express-api -n development --ignore-not-found
 # Delete any existing pods
 echo "Removing pods..."
 kubectl delete pod -l app=express-api -n development --ignore-not-found
+kubectl delete pod -l app=kafka -n kafka --ignore-not-found
 
 # Wait for resources to be fully deleted
 echo "Waiting for cleanup to complete..."
@@ -44,9 +45,15 @@ if ! kubectl get namespace development >/dev/null 2>&1; then
     kubectl create namespace development
 fi
 
+# Create kafka namespace if it doesn't exist
+if ! kubectl get namespace kafka >/dev/null 2>&1; then
+    echo "Creating kafka namespace..."
+    kubectl create namespace kafka
+fi
+
 # Build the Docker image
 echo "Building Docker image..."
-docker build -t express-api:latest .
+docker build -t express-api:latest . --no-cache
 
 # Load the image into minikube
 echo "Loading image into minikube..."

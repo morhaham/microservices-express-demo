@@ -44,7 +44,7 @@ export async function producerSend(record: ProducerRecord): Promise<Partial<Reco
     return producer.send(record)
 }
 
-export const createConsumer = async (groupId: string) => {
+const createConsumer = async (groupId: string) => {
     const consumer = kafka.consumer({ groupId });
     gracefulShutdown(() => consumerDisconnect(consumer))
     return consumer;
@@ -52,12 +52,14 @@ export const createConsumer = async (groupId: string) => {
 
 
 export const runConsumer = async (groupId: string, topic: string, fromBeginning: boolean, eachMessage: EachMessageHandler) => {
+    console.log("[runConsumer] creating consumer for groupId: ", groupId, " and topic: ", topic)
     const consumer = await createConsumer(groupId)
     await consumer.connect();
     await consumer.subscribe({ topic, fromBeginning });
     await consumer.run({
         eachMessage,
     })
+    console.log("[runConsumer] consumer connected to topic: ", topic)
 };
 
 async function consumerDisconnect(consumer: Consumer) {

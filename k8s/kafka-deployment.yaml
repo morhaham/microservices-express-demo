@@ -1,6 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  namespace: kafka
   name: kafka
 spec:
   replicas: 1
@@ -26,11 +27,11 @@ spec:
             - name: KAFKA_LISTENERS
               value: "PLAINTEXT://0.0.0.0:9092,CONTROLLER://0.0.0.0:9093"
             - name: KAFKA_ADVERTISED_LISTENERS
-              value: "PLAINTEXT://kafka.default.svc.cluster.local:9092"
+              value: "PLAINTEXT://kafka.kafka.svc.cluster.local:9092"
             - name: KAFKA_CONTROLLER_LISTENER_NAMES
               value: "CONTROLLER"
             - name: KAFKA_CONTROLLER_QUORUM_VOTERS
-              value: "1@kafka.default.svc.cluster.local:9093"
+              value: "1@kafka.kafka.svc.cluster.local:9093"
             - name: KAFKA_LOG_DIRS
               value: "/var/lib/kafka/data"
             - name: KAFKA_CLUSTER_ID
@@ -39,6 +40,8 @@ spec:
               value: "PLAINTEXT:PLAINTEXT,CONTROLLER:PLAINTEXT"
             - name: KAFKA_INTER_BROKER_LISTENER_NAME
               value: "PLAINTEXT"
+            - name: KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR
+              value: "1"
           volumeMounts:
             - name: kafka-data
               mountPath: /var/lib/kafka/data
@@ -50,6 +53,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
+  namespace: kafka
   name: kafka
 spec:
   type: ClusterIP

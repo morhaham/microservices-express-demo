@@ -26,7 +26,7 @@ spec:
         - name: NODE_ENV
           value: "production"
         - name: KAFKA_BROKERS
-          value: "kafka.default.svc.cluster.local:9092"
+          value: "kafka.kafka.svc.cluster.local:9092"
         resources:
           requests:
             memory: "128Mi"
