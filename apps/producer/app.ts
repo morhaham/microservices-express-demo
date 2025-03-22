@@ -1,5 +1,5 @@
 import express from "express";
-import { producerSend, runConsumer } from "./kafka";
+import { producerSend, runConsumer } from "kafka";
 
 const app = express();
 const port = 3000;
