@@ -2,6 +2,12 @@
   "installation": {
     "version": "20.6.2"
   },
+  "namedInputs": {
+    "default": [
+      "{projectRoot}/src/**/*.ts",
+      "{projectRoot}/index.ts"
+    ]
+  },
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
   "targetDefaults": {
     "tsc:watch": {
@@ -25,6 +31,9 @@
     "build": {
       "dependsOn": [
         "^build"
+      ],
+      "inputs": [
+        "default"
       ],
       "outputs": [
         "{projectRoot}/dist"
