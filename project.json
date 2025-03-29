@@ -1,0 +1,35 @@
+{
+  "name": "root",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": ".",
+  "projectType": "application",
+  "targets": {
+    "docker:apps:build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "sh docker-build.sh"
+        ],
+        "cwd": "."
+      }
+    },
+    "kubectl:log:user-events": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "kubectl logs -f user-events-dev -n user-events-dev"
+        ],
+        "cwd": "apps/user-events"
+      }
+    },
+    "kubectl:log:user-analytics": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "kubectl logs -f user-analytics-dev -n user-analytics-dev"
+        ],
+        "cwd": "apps/user-analytics"
+      }
+    }
+  }
+} 

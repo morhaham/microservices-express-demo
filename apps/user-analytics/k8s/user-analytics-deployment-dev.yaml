@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-analytics
+  namespace: user-analytics-dev
+  labels:
+    app: user-analytics
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: user-analytics
+  template:
+    metadata:
+      labels:
+        app: user-analytics
+    spec:
+      containers:
+      - name: user-analytics
+        image: user-analytics:latest
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 3000
+          name: http
+        env:
+        - name: NODE_ENV
+          value: "production"
+        - name: KAFKA_BROKERS
+          value: "kafka.kafka.svc.cluster.local:9092"
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "100m"
+          limits:
+            memory: "256Mi"
+            cpu: "200m"
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: http
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: http
+          initialDelaySeconds: 15
+          periodSeconds: 20
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: user-analytics-service
+  namespace: user-analytics-dev
+spec:
+  selector:
+    app: user-analytics
+  ports:
+    - name: http
+      protocol: TCP
+      port: 3001
+      targetPort: http
+  type: ClusterIP
+ 

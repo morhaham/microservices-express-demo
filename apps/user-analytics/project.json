@@ -1,0 +1,45 @@
+{
+  "name": "user-analytics",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/user-analytics",
+  "projectType": "application",
+  "targets": {
+    "dev": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "concurrently \"pnpm tsc:watch\" \"node --watch ./dist/app.js\""
+        ],
+        "cwd": "apps/user-analytics"
+      },
+      "dependsOn": ["tsc:watch"]
+    },
+    "tsc:watch": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "tsc -w"
+        ],
+        "cwd": "apps/user-analytics"
+      }
+    },
+    "build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "tsc"
+        ],
+        "cwd": "apps/user-analytics"
+      }
+    },
+    "k8s:deploy:dev": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "sh scripts/k8s-dev.sh"
+        ],
+        "cwd": "apps/user-analytics"
+      }
+    } 
+  }
+} 

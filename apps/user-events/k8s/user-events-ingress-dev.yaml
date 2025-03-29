@@ -1,18 +1,18 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: express-api-ingress
-  namespace: development
+  name: user-events-ingress
+  namespace: user-events-dev
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
     - http:
         paths:
-          - path: /
+          - path: /api/v1/user-events
             pathType: Prefix
             backend:
               service:
-                name: express-api-service
+                name: user-events-service
                 port:
                   number: 3000

@@ -3,6 +3,7 @@ lockfileVersion: '9.0'
 settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
+  injectWorkspacePackages: true
 
 importers:
 
@@ -12,7 +13,7 @@ importers:
         specifier: 20.6.2
         version: 20.6.2
 
-  apps/producer:
+  apps/user-analytics:
     dependencies:
       express:
         specifier: ^4.21.2
@@ -20,9 +21,25 @@ importers:
       kafka:
         specifier: workspace:*
         version: link:../../packages/kafka
-      kafkajs:
-        specifier: ^2.2.4
-        version: 2.2.4
+    devDependencies:
+      '@types/express':
+        specifier: ^5.0.0
+        version: 5.0.1
+      concurrently:
+        specifier: ^8.2.2
+        version: 8.2.2
+      typescript:
+        specifier: ^5.8.2
+        version: 5.8.2
+
+  apps/user-events:
+    dependencies:
+      express:
+        specifier: ^4.21.2
+        version: 4.21.2
+      kafka:
+        specifier: workspace:*
+        version: link:../../packages/kafka
     devDependencies:
       '@types/express':
         specifier: ^5.0.0

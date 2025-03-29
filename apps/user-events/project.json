@@ -1,0 +1,45 @@
+{
+  "name": "user-events",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/user-events",
+  "projectType": "application",
+  "targets": {
+    "dev": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "concurrently \"pnpm tsc:watch\" \"node --watch ./dist/app.js\""
+        ],
+        "cwd": "apps/user-events"
+      },
+      "dependsOn": ["tsc:watch"]
+    },
+    "tsc:watch": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "tsc -w"
+        ],
+        "cwd": "apps/user-events"
+      }
+    },
+    "build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "tsc"
+        ],
+        "cwd": "apps/user-events"
+      }
+    },
+    "k8s:deploy:dev": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "sh scripts/k8s-dev.sh"
+        ],
+        "cwd": "apps/user-events"
+      }
+    }
+  }
+} 

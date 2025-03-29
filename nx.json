@@ -10,35 +10,28 @@
   },
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
   "targetDefaults": {
-    "tsc:watch": {
-      "dependsOn": [
-        "^tsc:watch"
-      ],
-      "outputs": [
-        "{projectRoot}/dist"
-      ],
-      "cache": true
-    },
     "dev": {
-      "dependsOn": [
-        "^dev"
-      ],
-      "outputs": [
-        "{projectRoot}/dist"
-      ],
-      "cache": true
+      "cache": false,
+      "dependsOn": ["build"]
     },
     "build": {
-      "dependsOn": [
-        "^build"
-      ],
-      "inputs": [
-        "default"
-      ],
+      "cache": true,
       "outputs": [
         "{projectRoot}/dist"
-      ],
-      "cache": true
+      ]
+    },
+    "k8s:deploy:dev": {
+      "cache": false,
+      "dependsOn": [
+        {
+          "projects": ["kafka"],
+          "target": "k8s:deploy:dev"
+        },
+        {
+          "projects": ["root"],
+          "target": "docker:apps:build"
+        }
+      ]
     }
   }
 }

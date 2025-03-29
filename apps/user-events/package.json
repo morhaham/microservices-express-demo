@@ -1,0 +1,29 @@
+{
+  "name": "user-events",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "tsc:watch": "tsc -w",
+    "dev": "concurrently \"pnpm tsc:watch\" \"node --watch ./dist/app.js\"",
+    "build": "tsc",
+    "start": "node ./dist/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.2",
+    "kafka": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "concurrently": "^8.2.2",
+    "typescript": "^5.8.2"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "pnpm": "^10.6.3"
+  }
+}
