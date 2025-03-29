@@ -26,7 +26,9 @@ spec:
         - name: NODE_ENV
           value: "production"
         - name: KAFKA_BROKERS
-          value: "kafka.kafka.svc.cluster.local:9092"
+          value: "kafka-0.kafka.kafka-dev.svc.cluster.local:9092"
+        - name: KAFKA_TOPIC
+          value: "user-events-topic"
         resources:
           requests:
             memory: "128Mi"

@@ -26,6 +26,9 @@ sleep 3
 
 echo "🚀 Setting up local Kubernetes dev environment..."
 
+# Enable ingress addon
+minikube addons enable ingress
+
 # Create dev namespace if it doesn't exist
 if ! kubectl get namespace user-analytics-dev >/dev/null 2>&1; then
     echo "Creating dev namespace..."
@@ -38,7 +41,7 @@ kubectl apply -f k8s/user-analytics-deployment-dev.yaml
 
 # Wait for pods to be ready
 echo "Waiting for pods to be ready..."
-kubectl wait --for=condition=ready pod -l app=user-analytics -n user-analytics-dev --timeout=10s
+kubectl wait --for=condition=ready pod -l app=user-analytics -n user-analytics-dev --timeout=20s
 
 echo "Using minikube tunnel to expose the service..."
 minikube tunnel

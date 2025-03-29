@@ -3,7 +3,7 @@ import { producerSend } from "kafka";
 
 const app = express();
 const port = 3000;
-const topic = process.env.KAFKA_TOPIC || 'test-topic';
+const topic = process.env.KAFKA_TOPIC || 'user-events-topic';
 
 // print env variables
 console.log("KAFKA_BROKERS: ", process.env.KAFKA_BROKERS);

@@ -39,7 +39,7 @@ kubectl apply -f k8s/user-events-ingress-dev.yaml
 
 # Wait for pods to be ready
 echo "Waiting for pods to be ready..."
-kubectl wait --for=condition=ready pod -l app=user-events -n user-events-dev --timeout=10s
+kubectl wait --for=condition=ready pod -l app=user-events -n user-events-dev --timeout=20s
 
 echo "Using minikube tunnel to expose the service..."
 minikube tunnel

@@ -21,6 +21,15 @@
         ],
         "cwd": "packages/kafka"
       }
+    },
+    "kubectl:log": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "kubectl logs -l app=kafka -n kafka-dev --tail=100"
+        ],
+        "cwd": "packages/kafka"
+      }
     }
   }
 } 
