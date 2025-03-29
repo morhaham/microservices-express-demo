@@ -17,7 +17,7 @@
       "executor": "nx:run-commands",
       "options": {
         "commands": [
-          "kubectl logs -f user-events-dev -n user-events-dev"
+          "kubectl logs -f -l app=user-events -n user-events-dev"
         ],
         "cwd": "apps/user-events"
       }
@@ -26,7 +26,7 @@
       "executor": "nx:run-commands",
       "options": {
         "commands": [
-          "kubectl logs -f user-analytics-dev -n user-analytics-dev"
+          "kubectl logs -f -l app=user-analytics -n user-analytics-dev"
         ],
         "cwd": "apps/user-analytics"
       }

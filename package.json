@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "dev": "nx run-many --verbose --target=dev --projects=user-events,user-analytics",
-    "k8s:deploy:dev": "nx run-many  --target=k8s:deploy:dev --projects=user-events,user-analytics --parallel=false"
+    "kubectl:log:user-events": "nx run-many --verbose --target=kubectl:log --projects=user-events --parallel=true",
+    "kubectl:log:user-analytics": "nx run-many --verbose --target=kubectl:log --projects=user-analytics --parallel=true",
+    "k8s:deploy:dev": "nx run-many --target=k8s:deploy:dev --projects=user-events,user-analytics --parallel=false"
   },
   "keywords": [], 
   "author": "",

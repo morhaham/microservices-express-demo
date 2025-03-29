@@ -40,6 +40,15 @@
         ],
         "cwd": "apps/user-analytics"
       }
-    } 
+    },
+    "kubectl:log": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "kubectl logs -l app=user-analytics -n user-analytics-dev --tail=100"
+        ],
+        "cwd": "apps/user-analytics"
+      }
+    }
   }
 } 

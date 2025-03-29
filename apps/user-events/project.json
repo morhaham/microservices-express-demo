@@ -39,6 +39,15 @@
           "sh scripts/k8s-dev.sh"
         ],
         "cwd": "apps/user-events"
+      } 
+    },
+    "kubectl:log": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "kubectl logs -l app=user-events -n user-events-dev --tail=100"
+        ],
+        "cwd": "apps/user-events"
       }
     }
   }
